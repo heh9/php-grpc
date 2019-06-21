@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 	"os"
+	"fmt"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spiral/php-grpc"
