@@ -18,14 +18,14 @@ import (
 
 func main() {
 	t, closer, err := config.Configuration{
-		ServiceName: os.Getenv("JAEGER_SERVICE"),
+                ServiceName: os.Getenv("JAEGER_SERVICE_NAME"),
 		Sampler: &config.SamplerConfig{
 			Type:  "const",
 			Param: 1,
 		},
 		Reporter: &config.ReporterConfig{
 			BufferFlushInterval: 1 * time.Second,
-			LocalAgentHostPort:  os.Getenv("JAEGER_ADDRESS"),
+                        LocalAgentHostPort:  fmt.Sprintf("%s:%s", os.Getenv("JAEGER_AGENT_HOST"), os.Getenv("JAEGER_AGENT_PORT")),
 		},
 	}.NewTracer()
 	if err != nil {
