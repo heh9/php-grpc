@@ -2,6 +2,9 @@ package grpc
 
 import (
 	"fmt"
+	"path"
+	"sync"
+
 	"github.com/spiral/php-grpc/parser"
 	"github.com/spiral/roadrunner"
 	"github.com/spiral/roadrunner/service/env"
@@ -9,10 +12,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/encoding"
-	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
-	"github.com/opentracing/opentracing-go"
-	"path"
-	"sync"
 )
 
 // ID sets public GRPC service ID for roadrunner.Container.
@@ -172,7 +171,7 @@ func (svc *Service) serverOptions() (opts []grpc.ServerOption, err error) {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
-	svc.AddOption(grpc.UnaryInterceptor(grpc_opentracing.UnaryServerInterceptor(grpc_opentracing.WithTracer(opentracing.GlobalTracer()))))
+	svc.AddOption(grpc.UnaryInterceptor(UnaryServerInterceptor()))
 	opts = append(opts, svc.opts...)
 
 	// custom codec is required to bypass protobuf

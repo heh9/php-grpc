@@ -6,6 +6,7 @@ require (
 	github.com/emicklei/proto v1.6.10
 	github.com/golang/protobuf v1.3.1
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
+	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/opentracing/opentracing-go v1.1.0
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/sirupsen/logrus v1.3.0
